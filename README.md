@@ -1,6 +1,5 @@
-# Light Novel Web Crawler
-###### lnwc
-A web crawler built so that I can get my light novel content.
+# Novel Crawlers
+Web crawlers built to get your light novel content from the web, to you.
 
 Features to be added
 - [ ] Crawling the page and returning the content
@@ -8,4 +7,4 @@ Features to be added
 - [ ] Downloading the light novels in different formats.
 
 ## License
-This is a repo hosted under the MIT License. Feel free to utilise it.
+This repository is hosted under the MIT License, and is available for use.
