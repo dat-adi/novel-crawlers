@@ -1,6 +1,7 @@
 import components
 import zipfile
 from indexer import get_chapter_links
+from sources import getTWI
 import os
 
 
@@ -35,5 +36,5 @@ class ContentBuilder:
 
 
 if __name__ == "__main__":
-    twi = ContentBuilder("twi-", "The Wandering Inn", "pirateaba")
-    twi.web()
+    novel_details = getTWI()
+    twi = ContentBuilder( novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
