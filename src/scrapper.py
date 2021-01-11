@@ -37,4 +37,4 @@ class ContentBuilder:
 
 if __name__ == "__main__":
     novel_details = getTWI()
-    twi = ContentBuilder( novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
+    NovelBuilder = ContentBuilder( novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
