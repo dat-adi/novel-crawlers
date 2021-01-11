@@ -1,11 +1,12 @@
 import pickle
 import requests
 from bs4 import BeautifulSoup
+from sources import getTWI
 
 
-def get_chapter_links():
+def get_chapter_links(toc_link):
     try:
-        page = requests.get("https://wanderinginn.com/table-of-contents/").text
+        page = requests.get(toc_link).text
         soup = BeautifulSoup(page, "html.parser")
         contents_tag = soup.find("div", "entry-content")
         chapter_links = [link.get("href") for link in contents_tag.find_all("a")]
@@ -37,4 +38,5 @@ def set_chapter_file_links(chapter_links):
 
 
 if __name__ == "__main__":
-    get_chapter_links()
+    novel_details = getTWI()
+    get_chapter_links(novel_details["TableOfContents"])
