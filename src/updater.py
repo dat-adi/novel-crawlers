@@ -1,6 +1,11 @@
+# -*- coding:utf-8 -*-
+# Pickler
 import pickle
+
+# Chapter progress
 from indexer import get_chapter_links, set_chapter_file_links
 
+# Updating chapters based on current table of contents
 def update_chapters():
     try:
         with open("assets\\toc", "rb") as f:
@@ -21,5 +26,6 @@ def update_chapters():
     except Exception as e:
         print(e)
 
+# Main method to execute
 if __name__ == "__main__":
     update_chapters()

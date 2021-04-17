@@ -1,9 +1,17 @@
+# -*- coding:utf-8 -*-
+
+# Requesting and Parsing Webpages Imports
 import requests
 from bs4 import BeautifulSoup
+
+# Directory Traversal
 import os
+
+# Zipfile creation
 import zipfile
 
 
+# Downloading the webpage content
 def download(link, file_name):
     page = requests.get(link).text
     file = open(file_name, "w", encoding="utf-8")
@@ -11,7 +19,9 @@ def download(link, file_name):
     file.close()
 
 
+# Parsing the webpage content
 def clean(file_name_in, file_name_out):
+    # Parsing and Cleaning Content
     raw = open(file_name_in, "r", encoding="utf-8")
     soup = BeautifulSoup(raw, "html.parser")
     raw.close()
@@ -23,6 +33,8 @@ def clean(file_name_in, file_name_out):
     text = str(text)
     text = text[1:-1]
     text = text.replace("</p>,", "</p>\n")
+
+    # Writing to XML file format
     f = open(file_name_out, "w", encoding="utf-8")
     f.write(
         '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:epub="http://www.idpf.org/2007/ops" epub:prefix="z3998: https://daisy.org/z3998/2012/vocab/structure/" lang="en" xml:lang="en">'
@@ -45,6 +57,7 @@ def find_between(file):
     return soup.title
 
 
+# Creating the EPUB file
 def generate(html_files, novelname, author):
     epub = zipfile.ZipFile(novelname + ".epub", "w")
     epub.writestr("mimetype", "application/epub+zip")
@@ -136,5 +149,5 @@ def generate(html_files, novelname, author):
     epub.close()
 
 # commented code below as the files do not need to be deleted, in dev mode.
-#    for x in html_files:
-#        os.remove(x)
+    for x in html_files:
+        os.remove(x)

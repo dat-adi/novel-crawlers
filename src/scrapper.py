@@ -1,19 +1,31 @@
+# -*- coding:utf-8 -*-
+# Accessing components
 import components
+
+# Zipfile creation modules
 import zipfile
+
+# Sources and Extractors
 from indexer import get_chapter_links
 from sources import getTWI
+
+# Directory traversal
 import os
 
 
+# Builds the EPUB File
 class ContentBuilder:
+    # Defines output folder and book name
     def __init__(self, ChapterName, NovelName, Author):
         self.ChapterName = ChapterName
         self.NovelName = NovelName
         self.Author = Author
 
         self.OutputFolder = input("Enter the output folder : ")
+        print(self.OutputFolder)
 
 
+    # Generates the xhtml files
     def web(self):
         info = {"ChapterName": self.ChapterName,"NovelName": self.NovelName, "author": self.Author}
         output_folder = self.OutputFolder

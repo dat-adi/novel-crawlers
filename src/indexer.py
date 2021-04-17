@@ -1,6 +1,11 @@
+# -*- coding:utf-8 -*-
+
+# Web requests and parsers
 import pickle
 import requests
 from bs4 import BeautifulSoup
+
+# Importing sources
 from sources import getTWI
 
 # TODO: Add Unix Support for Application.
