@@ -26,11 +26,11 @@ class ContentBuilder:
 
 
     # Generates the xhtml files
-    def web(self):
+    def web(self, toc_link):
         info = {"ChapterName": self.ChapterName,"NovelName": self.NovelName, "author": self.Author}
         output_folder = self.OutputFolder
 
-        link_list = get_chapter_links()
+        link_list = get_chapter_links(toc_link)
 
         file_list = []
         for x in range(len(link_list)):
@@ -50,3 +50,4 @@ class ContentBuilder:
 if __name__ == "__main__":
     novel_details = getTWI()
     NovelBuilder = ContentBuilder( novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
+    NovelBuilder.web(novel_details["TableOfContents"])
