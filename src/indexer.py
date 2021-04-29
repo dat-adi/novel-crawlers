@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup
 # Importing sources
 from sources import getTWI
 
-# TODO: Add Unix Support for Application.
 def get_chapter_links(toc_link):
     try:
         page = requests.get(toc_link).text
