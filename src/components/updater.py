@@ -3,7 +3,7 @@
 import pickle
 
 # Chapter progress
-from indexer import get_chapter_links, set_chapter_file_links
+from components.indexer import get_chapter_links, set_chapter_file_links
 
 # Updating chapters based on current table of contents
 def update_chapters():

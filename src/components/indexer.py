@@ -6,7 +6,7 @@ import requests
 from bs4 import BeautifulSoup
 
 # Importing sources
-from sources import getTWI
+from components.sources import getTWI
 
 def get_chapter_links(toc_link):
     try:

@@ -6,8 +6,8 @@ import requests
 from bs4 import BeautifulSoup
 
 # Importing sources, and chapter links
-from indexer import get_chapter_links
-from sources import getTWI
+from components.indexer import get_chapter_links
+from components.sources import getTWI
 
 # Counter function, which counts the words
 def counter(index):

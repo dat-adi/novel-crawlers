@@ -6,8 +6,8 @@ import components
 import zipfile
 
 # Sources and Extractors
-from indexer import get_chapter_links
-from sources import getTWI
+from components.indexer import get_chapter_links
+from components.sources import getTWI
 
 # Directory traversal
 import os
@@ -49,5 +49,4 @@ class ContentBuilder:
 
 if __name__ == "__main__":
     novel_details = getTWI()
-    NovelBuilder = ContentBuilder( novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
-    NovelBuilder.web(novel_details["TableOfContents"])
+    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
