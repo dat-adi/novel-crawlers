@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 # Accessing components
-import components
+import components.extractor as extractor
 
 # Zipfile creation modules
 import zipfile
@@ -16,37 +16,38 @@ import os
 # Builds the EPUB File
 class ContentBuilder:
     # Defines output folder and book name
-    def __init__(self, ChapterName, NovelName, Author):
+    def __init__(self, ChapterName, NovelName, Author, TableOfContents):
         self.ChapterName = ChapterName
         self.NovelName = NovelName
         self.Author = Author
+        self.TableOfContents = TableOfContents
 
         self.OutputFolder = input("Enter the output folder : ")
         print(self.OutputFolder)
 
 
     # Generates the xhtml files
-    def web(self, toc_link):
+    def web(self):
         info = {"ChapterName": self.ChapterName,"NovelName": self.NovelName, "author": self.Author}
         output_folder = self.OutputFolder
 
-        link_list = get_chapter_links(toc_link)
+        link_list = get_chapter_links(self.TableOfContents)
 
         file_list = []
         for x in range(len(link_list)):
             namer = link_list[x][36:-1]
             print(namer)
-            components.download(link_list[x], os.path.join(output_folder, str(x) + ".html"))
-            components.clean(
+            extractor.download(link_list[x], os.path.join(output_folder, str(x) + ".html"))
+            extractor.clean(
                 os.path.join(output_folder, str(x) + ".html"),
                 os.path.join(output_folder, info["ChapterName"] + str(namer) + ".xhtml"),
             )
             file_list.append(
                 os.path.join(output_folder, info["ChapterName"] + str(namer) + ".xhtml")
             )
-        components.generate(file_list, info["NovelName"], info["author"])
+        extractor.generate(file_list, info["NovelName"], info["author"])
 
 
 if __name__ == "__main__":
     novel_details = getTWI()
-    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"])
+    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"], novel_details["TableOfContents"])

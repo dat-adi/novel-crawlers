@@ -3,7 +3,7 @@
 
 # Brings in the ContentBuilder which builds the EPUB by connecting all the components
 from components.scrapper import ContentBuilder
-from components.sources import getTWI
+from components.sources import getNovelDetails
 
 '''This piece of code acts as the hub for CLI users.'''
 
@@ -21,9 +21,19 @@ def user_prompt():
     print("...")
     print("1. The Wandering Inn, by pirateaba")
     print("2. Worm, by WildBowPig")
-    ln_selection = int(input("> "))
-    return ln_selection
-
+    novel_details = getNovelDetails(int(input("> ")))
+    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"], novel_details["TableOfContents"])
+    return NovelBuilder
 
 if __name__ == "__main__":
-    print(user_prompt())
+    novel_selection = user_prompt()
+    while(True):
+        print("You have picked ", novel_selection.NovelName, ", Are you sure?(y/n)")
+        if(input("> ") != "y"):
+            break
+        novel_selection.web()
+        print("Thank you for using Novel Crawlers!")
+        print("Your book is now stored at the location ", novel_selection.OutputFolder)
+        break
+
+    print("Exiting...")
