@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 # Importing sources
 from components.sources import getTWI
 
+
 def get_chapter_links(toc_link):
     try:
         page = requests.get(toc_link).text
@@ -32,7 +33,9 @@ def get_chapter_links(toc_link):
 
         return chapter_links
     except:
-        print("You seem to be facing network issues, please check your internet connection, and retry...")
+        print(
+            "You seem to be facing network issues, please check your internet connection, and retry..."
+        )
 
 
 def set_chapter_file_links(chapter_links):

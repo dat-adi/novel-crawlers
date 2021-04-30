@@ -25,10 +25,13 @@ class ContentBuilder:
         self.OutputFolder = input("Enter the output folder : ")
         print(self.OutputFolder)
 
-
     # Generates the xhtml files
     def web(self):
-        info = {"ChapterName": self.ChapterName,"NovelName": self.NovelName, "author": self.Author}
+        info = {
+            "ChapterName": self.ChapterName,
+            "NovelName": self.NovelName,
+            "author": self.Author,
+        }
         output_folder = self.OutputFolder
 
         link_list = get_chapter_links(self.TableOfContents)
@@ -37,10 +40,14 @@ class ContentBuilder:
         for x in range(len(link_list)):
             namer = link_list[x][36:-1]
             print(namer)
-            extractor.download(link_list[x], os.path.join(output_folder, str(x) + ".html"))
+            extractor.download(
+                link_list[x], os.path.join(output_folder, str(x) + ".html")
+            )
             extractor.clean(
                 os.path.join(output_folder, str(x) + ".html"),
-                os.path.join(output_folder, info["ChapterName"] + str(namer) + ".xhtml"),
+                os.path.join(
+                    output_folder, info["ChapterName"] + str(namer) + ".xhtml"
+                ),
             )
             file_list.append(
                 os.path.join(output_folder, info["ChapterName"] + str(namer) + ".xhtml")
@@ -50,4 +57,9 @@ class ContentBuilder:
 
 if __name__ == "__main__":
     novel_details = getTWI()
-    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"], novel_details["TableOfContents"])
+    NovelBuilder = ContentBuilder(
+        novel_details["ChapterName"],
+        novel_details["NovelName"],
+        novel_details["Author"],
+        novel_details["TableOfContents"],
+    )

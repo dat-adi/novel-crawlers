@@ -26,9 +26,9 @@ def clean(file_name_in, file_name_out):
     soup = BeautifulSoup(raw, "html.parser")
     raw.close()
     chapter_tag = soup.find("article", "post")
-    chapter_title = soup.find('h1', 'entry-title')
+    chapter_title = soup.find("h1", "entry-title")
     chapter_title = chapter_title.get_text()
-    text = chapter_tag.findChildren('p')
+    text = chapter_tag.findChildren("p")
     text = text[:-1]
     text = str(text)
     text = text[1:-1]
@@ -148,6 +148,6 @@ def generate(html_files, novelname, author):
     )
     epub.close()
 
-# commented code below as the files do not need to be deleted, in dev mode.
+    # commented code below as the files do not need to be deleted, in dev mode.
     for x in html_files:
         os.remove(x)

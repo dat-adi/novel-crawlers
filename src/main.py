@@ -5,7 +5,7 @@
 from components.scrapper import ContentBuilder
 from components.sources import getNovelDetails
 
-'''This piece of code acts as the hub for CLI users.'''
+"""This piece of code acts as the hub for CLI users."""
 
 # Owned
 __author__ = "Datta Adithya"
@@ -22,14 +22,20 @@ def user_prompt():
     print("1. The Wandering Inn, by pirateaba")
     print("2. Worm, by WildBowPig")
     novel_details = getNovelDetails(int(input("> ")))
-    NovelBuilder = ContentBuilder(novel_details["ChapterName"], novel_details["NovelName"], novel_details["Author"], novel_details["TableOfContents"])
+    NovelBuilder = ContentBuilder(
+        novel_details["ChapterName"],
+        novel_details["NovelName"],
+        novel_details["Author"],
+        novel_details["TableOfContents"],
+    )
     return NovelBuilder
+
 
 if __name__ == "__main__":
     novel_selection = user_prompt()
-    while(True):
+    while True:
         print("You have picked ", novel_selection.NovelName, ", Are you sure?(y/n)")
-        if(input("> ") != "y"):
+        if input("> ") != "y":
             break
         novel_selection.web()
         print("Thank you for using Novel Crawlers!")

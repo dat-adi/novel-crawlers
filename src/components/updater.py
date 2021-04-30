@@ -26,6 +26,7 @@ def update_chapters():
     except Exception as e:
         print(e)
 
+
 # Main method to execute
 if __name__ == "__main__":
     update_chapters()

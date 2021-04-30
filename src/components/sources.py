@@ -1,20 +1,23 @@
 def getTWI():
-    return {"ChapterName": "twi-",
-            "NovelName": "The Wandering Inn",
-            "Author": "pirateaba",
-            "TableOfContents": "https://wanderinginn.com/table-of-contents/"}
+    return {
+        "ChapterName": "twi-",
+        "NovelName": "The Wandering Inn",
+        "Author": "pirateaba",
+        "TableOfContents": "https://wanderinginn.com/table-of-contents/",
+    }
+
 
 def getWorm():
-    return {"ChapterName": "worm-",
-            "NovelName": "Worm",
-            "Author": "WildBowPig",
-            "TableOfContents": "https://parahumans.wordpress.com/table-of-contents/"}
+    return {
+        "ChapterName": "worm-",
+        "NovelName": "Worm",
+        "Author": "WildBowPig",
+        "TableOfContents": "https://parahumans.wordpress.com/table-of-contents/",
+    }
+
 
 def getNovelDetails(requestedNovel):
-    library = {
-            1: getTWI(),
-            2: getWorm()
-            }
+    library = {1: getTWI(), 2: getWorm()}
     return library.get(requestedNovel)
 
 
