@@ -21,7 +21,7 @@ def user_prompt():
     print("...")
     print("1. The Wandering Inn, by pirateaba")
     print("2. Worm, by WildBowPig")
-    novel_details = getNovelDetails(int(input("> ")))
+    novel_details = getNovelDetails(eval(input("> ")))
     NovelBuilder = ContentBuilder(
         novel_details["ChapterName"],
         novel_details["NovelName"],
