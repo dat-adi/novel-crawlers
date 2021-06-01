@@ -16,19 +16,23 @@ __email__ = "dat.adithya@gmail.com"
 
 
 def user_prompt():
-    version_info = open("../assets/version.txt", "r").read()
-    print("Novel Crawlers | " + version_info)
-    print("...")
-    print("1. The Wandering Inn, by pirateaba")
-    print("2. Worm, by WildBowPig")
-    novel_details = getNovelDetails(eval(input("> ")))
-    NovelBuilder = ContentBuilder(
-        novel_details["ChapterName"],
-        novel_details["NovelName"],
-        novel_details["Author"],
-        novel_details["TableOfContents"],
-    )
-    return NovelBuilder
+    try:
+        version_info = open("../assets/version.txt", "r").read()
+        print("Novel Crawlers | " + version_info)
+    except:
+        print("Novel Crawlers | Version Unknown" )
+    finally:
+        print("...")
+        print("1. The Wandering Inn, by pirateaba")
+        print("2. Worm, by WildBowPig")
+        novel_details = getNovelDetails(eval(input("> ")))
+        NovelBuilder = ContentBuilder(
+            novel_details["ChapterName"],
+            novel_details["NovelName"],
+            novel_details["Author"],
+            novel_details["TableOfContents"],
+        )
+        return NovelBuilder
 
 
 if __name__ == "__main__":

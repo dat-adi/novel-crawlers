@@ -131,3 +131,4 @@ dmypy.json
 # Intermediate and Production files
 *.epub
 *.xhtml
+tags
