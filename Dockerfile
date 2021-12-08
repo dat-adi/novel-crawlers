@@ -1,20 +1,20 @@
 # Base Image
-FROM python:3.8.3-slim-buster
+FROM python:3.8
+
+# Creating a non root user
+RUN useradd -ms /bin/bash user
+USER user
 
 # Defining the workspace that we're going to be
 # working in
-WORKDIR /src
-
-# Creating a non root user
-RUN useradd -m -r user && \
-    chown user /src
+WORKDIR /home/user
 
 # Updating the dependencies
 RUN pip install -U \
     pip
 
 # Install Dependencies
-COPY requirements.txt ./
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # Copy files
@@ -24,5 +24,8 @@ COPY . .
 ARG GIT_HASH
 ENV GIT_HASH=$(GIT_HASH:-dev)
 
-# Setting the user
-USER user
+# Exposing the port
+EXPOSE 10000
+
+# Defining the entrypoint
+ENTRYPOINT ["python", "./src/main.py"]
