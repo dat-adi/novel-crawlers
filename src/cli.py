@@ -26,11 +26,14 @@ def user_prompt():
         print("1. The Wandering Inn, by pirateaba")
         print("2. Worm, by WildBowPig")
         novel_details = getNovelDetails(eval(input("> ")))
+
+        output_folder = input("Enter the storage path : ")
         NovelBuilder = ContentBuilder(
             novel_details["ChapterName"],
             novel_details["NovelName"],
             novel_details["Author"],
             novel_details["TableOfContents"],
+            output_folder
         )
         return NovelBuilder
 
