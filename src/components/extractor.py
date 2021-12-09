@@ -58,8 +58,8 @@ def find_between(file):
 
 
 # Creating the EPUB file
-def generate(html_files, novelname, author):
-    epub = zipfile.ZipFile(novelname + ".epub", "w")
+def generate(html_files, output_folder, novelname, author):
+    epub = zipfile.ZipFile(output_folder + novelname + ".epub", "w")
     epub.writestr("mimetype", "application/epub+zip")
     epub.writestr(
         "META-INF/container.xml",
