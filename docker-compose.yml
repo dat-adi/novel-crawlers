@@ -2,7 +2,9 @@ version: '2.2'
 services:
   novel-crawlers:
     container_name: novel-crawler
-    image: nov-craw
+    image: novel-crawler
+    volumes:
+      - /home/dat-adi/Documents/Books/TWI:/data/files
     ports:
       - "10000:10000"
     restart: unless-stopped
