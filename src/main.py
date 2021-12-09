@@ -1,49 +1,85 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+# Importing enum for setting up options
+from enum import Enum
 
-# Brings in the ContentBuilder which builds the EPUB by connecting all the components
+# Importing FastAPI Tools
+from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
+from pydantic import BaseModel
+
+# Importing the scraper
 from components.scrapper import ContentBuilder
-from components.sources import getNovelDetails
 
-"""This piece of code acts as the hub for CLI users."""
+# Initializing a FastAPI application
+app = FastAPI()
 
-# Owned
-__author__ = "Datta Adithya"
-__credits__ = ["Datta Adithya"]
-__license__ = "MIT"
-__maintainer__ = "Datta Adithya"
-__email__ = "dat.adithya@gmail.com"
+# Defining a Book Title model
+class BookTitle(str, Enum):
+    twi = "wandering-inn"
+    worm = "worm"
 
+# Defining the Novel model
+class Novel(BaseModel):
+    BookName: str
+    ChapterName: str
+    NovelName: str
+    Author: str
+    TableOfContents: str
 
-def user_prompt():
-    try:
-        version_info = open("../assets/version.txt", "r").read()
-        print("Novel Crawlers | " + version_info)
-    except:
-        print("Novel Crawlers | Version Unknown" )
-    finally:
-        print("...")
-        print("1. The Wandering Inn, by pirateaba")
-        print("2. Worm, by WildBowPig")
-        novel_details = getNovelDetails(eval(input("> ")))
-        NovelBuilder = ContentBuilder(
-            novel_details["ChapterName"],
-            novel_details["NovelName"],
-            novel_details["Author"],
-            novel_details["TableOfContents"],
-        )
-        return NovelBuilder
+@app.get('/')
+async def home_page() -> [BookTitle]:
+    """Providing Books to choose from"""
+    book_titles = [BookTitle.twi, BookTitle.worm]
+    return book_titles
+
+@app.post('/add-book')
+async def add_book(novel: Novel) -> Novel:
+    return novel
+
+@app.get('/books/{book_name}')
+async def get_book(book_name: str):
+    if book_name == "wandering-inn":
+        result = {
+            "BookName": "wandering-inn",
+            "ChapterName": "twi-",
+            "NovelName": "The Wandering Inn",
+            "Author": "pirateaba",
+            "TableOfContents": "https://wanderinginn.com/table-of-contents/",
+        }
+    elif book_name == "worm":
+        result =  {
+            "BookName": "worm",
+            "ChapterName": "worm-",
+            "NovelName": "Worm",
+            "Author": "WildBowPig",
+            "TableOfContents": "https://parahumans.wordpress.com/table-of-contents/",
+        }
+        return RedirectResponse("/not-found")
+    else:
+        result = {"message": "help"}
+
+    return result
+
+@app.post('/scrape')
+async def scrape_book(novel: Novel, output_path: str):
+    ContentBuilder(
+        novel.ChapterName,
+        novel.NovelName,
+        novel.Author,
+        novel.TableOfContents,
+        output_path
+    ).web()
+
+@app.get('/not-found')
+async def not_found():
+    # This page should be used for options that aren't made yet.
+    return {
+            "message": "The world works in mysterious ways.",
+            "message2": "One day, you're the guy who has everything figured out.",
+            "message3": "The next day, even your dog is having an existential crisis."
+            }
 
 
 if __name__ == "__main__":
-    novel_selection = user_prompt()
-    while True:
-        print("You have picked ", novel_selection.NovelName, ", Are you sure?(y/n)")
-        if input("> ") != "y":
-            break
-        novel_selection.web()
-        print("Thank you for using Novel Crawlers!")
-        print("Your book is now stored at the location ", novel_selection.OutputFolder)
-        break
+    import uvicorn
 
-    print("Exiting...")
+    uvicorn.run(app, host="0.0.0.0", port=10000)

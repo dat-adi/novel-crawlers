@@ -16,14 +16,13 @@ import os
 # Builds the EPUB File
 class ContentBuilder:
     # Defines output folder and book name
-    def __init__(self, ChapterName, NovelName, Author, TableOfContents):
+    def __init__(self, ChapterName, NovelName, Author, TableOfContents, OutputFolder):
         self.ChapterName = ChapterName
         self.NovelName = NovelName
         self.Author = Author
         self.TableOfContents = TableOfContents
 
-        self.OutputFolder = input("Enter the output folder : ")
-        print(self.OutputFolder)
+        self.OutputFolder = OutputFolder
 
     # Generates the xhtml files
     def web(self):
