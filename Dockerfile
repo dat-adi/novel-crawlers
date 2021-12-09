@@ -22,7 +22,7 @@ ENV GIT_HASH=$(GIT_HASH:-dev)
 
 RUN mkdir -p /data/files && chown -R 65534:65534 /data
 
-VOLUME ["data/files"]
+VOLUME ["/data/files"]
 
 # Exposing the port
 EXPOSE 10000
