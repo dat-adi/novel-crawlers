@@ -4,7 +4,7 @@ services:
     container_name: novel-crawler
     image: novel-crawler
     volumes:
-      - /home/dat-adi/Documents/Books/TWI:/data/files
+      - <path/to/files>:/data/files
     ports:
       - "10000:10000"
     restart: unless-stopped
