@@ -19,7 +19,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag novel-crawlers:$(date +%s)
+      run: docker build . --file Dockerfile --tag datadi/novel-crawlers
 
     - name: Publish Docker Image
       if: (github.ref == 'refs/heads/master' || github.event_name == 'push') && github.repository == 'dat-adi/novel-crawlers'
