@@ -26,11 +26,6 @@ class ContentBuilder:
 
     # Generates the xhtml files
     def web(self):
-        info = {
-            "ChapterName": self.ChapterName,
-            "NovelName": self.NovelName,
-            "author": self.Author,
-        }
         output_folder = self.OutputFolder
 
         link_list = get_chapter_links(self.TableOfContents)
@@ -45,13 +40,13 @@ class ContentBuilder:
             extractor.clean(
                 os.path.join(output_folder, str(x) + ".html"),
                 os.path.join(
-                    output_folder, info["ChapterName"] + str(namer) + ".xhtml"
+                    output_folder, self.ChapterName + str(namer) + ".xhtml"
                 ),
             )
             file_list.append(
-                os.path.join(output_folder, info["ChapterName"] + str(namer) + ".xhtml")
+                os.path.join(output_folder, self.ChapterName + str(namer) + ".xhtml")
             )
-        extractor.generate(file_list, info["NovelName"], info["author"])
+        extractor.generate(file_list, self.OutputFolder, self.NovelName, self.Author)
 
 
 if __name__ == "__main__":
