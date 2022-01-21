@@ -1,5 +1,11 @@
 # -*- coding:utf-8 -*-
 
+# Getting color into the picture
+from rich import print
+from rich.console import Console
+from rich.table import Table
+from rich.progress import track
+
 # Web requests and parsers
 import pickle
 import requests
@@ -11,11 +17,18 @@ from components.sources import getTWI
 
 # Counter function, which counts the words
 def counter(index):
-    print("The Wandering Inn word counter")
     totalWordCount = 0
     chapter_number = 0
-    print("Total Word Count Value : ", totalWordCount)
-    for link in index:
+    table = Table(title="The Wandering Inn Word Counter", caption=totalWordCount)
+
+    table.add_column("Chapter", style="cyan")
+    table.add_column("Title", style="magenta", no_wrap=True)
+    table.add_column("Word Count", justify="right", style="green")
+
+    print("[blue]A table will be printed for every 25 chapters.")
+    print("[magenta]Thank you for using Novel Crawlers!")
+
+    for link in track(index, description="[red]Counting"):
         page = requests.get(link).text
         soup = BeautifulSoup(page, "html.parser")
         chapter_number += 1
@@ -32,24 +45,28 @@ def counter(index):
         text = str(text)
         words = text.split()
 
-        print(
-            f"Chapter {chapter_number:<5} : {chapter_title:<40} | Word Count : {len(words)}"
+        table.add_row(
+            f"Chapter {chapter_number:<5}",
+            f"{chapter_title:<40}",
+            f"{len(words)}"
         )
+
         totalWordCount += len(words)
 
-        if chapter_number % 100 == 0:
-            print(
-                "Total Word Count till Chapter ",
-                chapter_number,
-                " is : ",
-                totalWordCount,
-            )
+        if chapter_number % 25 == 0:
+            print(table)
 
     print("Total Word Count : ", totalWordCount)
     print("Number of pages : ", totalWordCount / 450)
 
+    console = Console()
+    console.print(table)
 
-if __name__ == "__main__":
+
+def worder():
     novel_details = getTWI()
     links = get_chapter_links(novel_details["TableOfContents"])
     counter(links)
+
+if __name__ == "__main__":
+    worder()
