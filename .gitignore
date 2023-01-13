@@ -133,3 +133,4 @@ dmypy.json
 *.xhtml
 tags
 docker-compose.yml
+.env
