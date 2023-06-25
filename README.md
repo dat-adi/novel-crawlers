@@ -1,6 +1,14 @@
 # Novel Crawlers
 Web crawlers built to get your light novel content from the web, to you.
 
+# *THIS PROJECT IS NOW BEING ARCHIVED*
+
+Initially, this work was only made as a means for a young programmer to learn to make an EPUB for the book that he loves. Now, I've passed that stage and the book too has continued to grow larger and the author more skilled. The website that I parse for EPUB generation has evolved and despite me being able to work around it, I see no point to creating the EPUBs when the internet is largely available, and my goal for spreading propaganda has been achieved.
+
+Please consider supporting the book's author by reading from the website instead. Recently, the content has only gotten much more interesting with a bunch of effects that I suppose are only possible on the website, and I wish for anyone reading to be able to experience that, at it's fullest.
+
+This repository and novel-crawlers v2, however, will stay on GitHub as the remains of my first passion project.
+
 ### Features
 
 - [x] Crawling the page and returning content
